@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>BABYLON Game</title>
+</head>
+
+<body onload="onLoad()" cz-shortcut-listen="true">
+    <canvas
+        id="renderCanvas"
+        width="900"
+        height="500"
+        touch-action="none"
+        style="touch-action: none;"
+        tabindex="1">
+    </canvas>
+</body>
+
+<script>
+    function onLoad(){
+        const canvas = document.getElementById("renderCanvas");
+        const engine = new BABYLON.Engine(canvas);
+        const main = new Main(canvas, engine);
+        main.init();
+    }
+</script>
+
+</html>
