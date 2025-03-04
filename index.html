@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.babylonjs.com/babylon.js"></script>
     <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-    <script src="js/main.js"></script>
     <link rel="stylesheet" href="styles.css">
     <title>BABYLON Game</title>
 </head>
@@ -22,11 +21,39 @@
 </body>
 
 <script>
-    function onLoad(){
-        const canvas = document.getElementById("renderCanvas");
-        const engine = new BABYLON.Engine(canvas);
-        const main = new Main(canvas, engine);
-        main.init();
+    const canvasId = "renderCanvas";
+    const gameSource = "game/";
+
+    function loadScripts(scripts, callback) {
+        let count = scripts.length;
+        scripts.forEach(function(src) {
+            let script = document.createElement('script');
+            script.src = gameSource + src;
+            script.onload = function() {
+                if (--count === 0) {
+                    callback();
+                }
+            };
+            document.head.appendChild(script);
+        });
+    }
+
+    function onLoad() {
+        // Load scripts in the correct order
+        loadScripts([
+            // interfaces
+            'scenes/I_SCENE.js',
+            // core classes
+            'scenes/TestScene.js',
+            // lastly, the main script
+            'main.js'
+        ],
+        // Initialize the game after all scripts are loaded
+        function() {
+            const canvas = document.getElementById(canvasId);
+            const game = Main.getInstance(gameSource,canvas);
+            game.init();
+        });
     }
 </script>
 
