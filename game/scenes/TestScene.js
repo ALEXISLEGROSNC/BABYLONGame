@@ -13,8 +13,15 @@ class TestScene extends I_SCENE {
                 
                 BABYLON.Mesh.CreateGround("ground", 8, 13, 8, this.scene);            
         
+                console.log(Main.getAssetsDir() + "characters/MainCharacter/");
                 // character
-                BABYLON.SceneLoader.ImportMesh("", Main.getAssetsDir()+"characters/MainCharacter/", "MainCharacter.glb", this.scene, (meshes, particleSystems, skeletons, animationGroups) => {
+                BABYLON.SceneLoader.ImportMesh(
+                    "",
+                    Main.getAssetsDir() + "characters/MainCharacter/",
+                    "MainCharacter.glb",
+                    this.scene,
+                    (meshes, particleSystems, skeletons, animationGroups) => {
+
                     this.mainCharacter = meshes[0];
                     this.mainCharacter.position.y = 2;
         
@@ -22,14 +29,10 @@ class TestScene extends I_SCENE {
                     if (animationGroups.length > 0) {
                         animationGroups[0].start(true, 1.0, animationGroups[0].from, animationGroups[0].to, false);
                     }
-        
-                    
-                    camera.setTarget(this.mainCharacter.position);
                 });
         
                 // camera
                 let camera = new BABYLON.FreeCamera("camera", new BABYLON.Vector3(0, 3, -5), this.scene);      
-                camera.setTarget(BABYLON.Vector3.Zero());      
                 camera.attachControl(this.canvas, false);        
     }
 }

@@ -26,7 +26,7 @@ class Main {
 
     // config
     static getAssetsDir() {
-        return gameSource+"assets/";
+        return this.getInstance().gameSource+"assets/";
     }
 
     // important part of the code starts here

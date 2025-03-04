@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.babylonjs.com/babylon.js"></script>
-    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    
     <title>BABYLON Game</title>
-</head>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- BABYLONJS -->
+    <script src="https://cdn.babylonjs.com/babylon.js" defer></script>
+    <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js" defer></script>
 
-<body onload="onLoad()" cz-shortcut-listen="true">
+    <!-- GAME INIT -->
+    <script> // after all the dom is loaded , initialize the game
+        window.addEventListener('DOMContentLoaded', () => {
+            const main = Main.getInstance(
+                'game/',
+                document.getElementById('renderCanvas')
+            );
+            main.init();
+        });
+    </script>
+
+</head>
+<body onload="" cz-shortcut-listen="true">
     <canvas
         id="renderCanvas"
         width="900"
@@ -19,42 +33,8 @@
         tabindex="1">
     </canvas>
 </body>
-
-<script>
-    const canvasId = "renderCanvas";
-    const gameSource = "game/";
-
-    function loadScripts(scripts, callback) {
-        let count = scripts.length;
-        scripts.forEach(function(src) {
-            let script = document.createElement('script');
-            script.src = gameSource + src;
-            script.onload = function() {
-                if (--count === 0) {
-                    callback();
-                }
-            };
-            document.head.appendChild(script);
-        });
-    }
-
-    function onLoad() {
-        // Load scripts in the correct order
-        loadScripts([
-            // interfaces
-            'scenes/I_SCENE.js',
-            // core classes
-            'scenes/TestScene.js',
-            // lastly, the main script
-            'main.js'
-        ],
-        // Initialize the game after all scripts are loaded
-        function() {
-            const canvas = document.getElementById(canvasId);
-            const game = Main.getInstance(gameSource,canvas);
-            game.init();
-        });
-    }
-</script>
-
 </html>
+
+<script src="game/scenes/I_SCENE.js" defer></script>
+<script src="game/scenes/TestScene.js" defer></script>
+<script src="game/main.js" defer></script>
