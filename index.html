@@ -10,9 +10,17 @@
     <!-- BABYLONJS -->
     <script src="https://cdn.babylonjs.com/babylon.js" defer></script>
     <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js" defer></script>
+    <script src="https://cdn.babylonjs.com/havok/HavokPhysics_umd.js" defer></script>
 
     <!-- GAME INIT -->
-    <script> // after all the dom is loaded , initialize the game
+    <script type="module">
+        import HavokPhysics from "https://cdn.babylonjs.com/havok/HavokPhysics_es.js";
+        let havokInstance;
+        HavokPhysics().then((havok) => {
+          havokInstance = havok;
+        });
+    </script>
+    <script> // after all the dom is loaded
         window.addEventListener('DOMContentLoaded', () => {
             const main = Main.getInstance(
                 'game/',
@@ -36,11 +44,12 @@
 </html>
 
 <!-- TYPES -->
-<script src="game/assets/characters/E_MOVEMENT_DIRECTIONS.js" defer></script>
+<!-- <script src="game/assets/characters/E_MOVEMENT_DIRECTIONS.js" defer></script> -->
 <!-- INTERFACES -->
-<script src="game/scenes/I_SCENE.js" defer></script>
-<script src="game/assets/characters/I_CHARACTER.js" defer></script>
+<!-- <script src="game/scenes/I_SCENE.js" defer></script>
+<script src="game/assets/characters/I_CHARACTER.js" defer></script> -->
 <!-- CORE CLASSES -->
 <!-- SCENES -->
-<script src="game/scenes/TestScene.js" defer></script>
+<!-- <script src="game/scenes/TestScene.js" defer></script> -->
+<script src="game/scenes/CoffeeScene.js" defer></script>
 <script src="game/main.js" defer></script>
